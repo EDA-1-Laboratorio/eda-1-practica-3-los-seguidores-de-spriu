@@ -16,9 +16,14 @@ int main() {
     float total_pagar = 0.0;
 
     printf("--- Bienvenido a la Pizzería de Copilco ---\n");
+    do{
     printf("¿Cuántas pizzas vas a ordenar? ");
     scanf("%d", &num_pizzas);
-
+    if (num_pizzas<0)
+        printf("Error: Ingrese una cantidad real de pizzas ---\n");
+    }
+    while (num_pizzas<0);
+    
     // 2. Arreglo para almacenar la orden
     Pizza orden[num_pizzas];
 
@@ -26,11 +31,21 @@ int main() {
     for (int i = 0; i < num_pizzas; i++) {
         printf("\n--- Ingresando datos de la Pizza %d ---\n", i + 1);
         
+        do{
         printf("Ingresa el tamaño (radio en cm): ");
         scanf("%f", &orden[i].radio);  //Lee el radio de la pizza 
-        
+        if (orden[i].radio<=0)
+        printf("Error: Ingrese una cantidad real de radio ---\n");
+    }
+    while (orden[i].radio<=0);
+       
+        do{
         printf("¿Cuántos toppings extra llevará?: ");
         scanf("%d", &orden[i].num_toppings); //Lee el número de toppings extra
+        if (orden[i].num_toppings<0)
+        printf("Error: No puedes agregar toppings negativos ---\n");
+    }
+    while (orden[i].num_toppings<0);
         
         // Limpiar el buffer del teclado antes de leer la cadena de texto para evitar problemas con fgets
         while (getchar() != '\n');
@@ -95,4 +110,3 @@ int main() {
     printf("========================================\n");
 
     return 0;
-}
